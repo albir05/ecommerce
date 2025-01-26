@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'main' %}
+
+ <!--main content start -->
+ <div class="row mt-5">
+    <div class="col-md-9">
+        <h5 class="bg-primary text-white p-2">Customer Details</h5>
+        {% for x in data %}
+        {% if forloop.counter == 1 %}
+        <p><strong>Name: &nbsp;&nbsp;</strong>{{x.uid.username}}</p>
+        <p><strong>Mobile no.:&nbsp;&nbsp;</strong> 989898989</p>
+        <p><strong>Email:&nbsp;&nbsp;</strong>{{x.uid.email}}</p>
+        {% endif %}
+        {% endfor %}
+        <h5 class="bg-primary text-white p-2">Product Details</h5>
+        {% for x in data %}
+        <div class="row mt-3">
+            <div class="col-md-6">
+                <img src="{{x.pid.pimage.url}}" class="card-img-top" height="400px" alt="...">
+            </div>
+            <div class="col-md-6">
+                <p><strong>Product name:&nbsp;&nbsp;</strong>{{x.pid.name}}</p>
+                <p><strong>Price: &nbsp; &nbsp;</strong> Rs.{{x.pid.price}}</p>
+                {% if x.pid.cat == 1 %}
+                <p><strong>Category: &nbsp; &nbsp;</strong>Mobile</p>
+                {% elif x.pid.cat == 2 %}
+                <p><strong>Category: &nbsp; &nbsp;</strong>Shoes</p>
+                {% elif x.pid.cat == 3 %}
+                <p><strong>Category: &nbsp; &nbsp;</strong>Clothes</p>
+                {% else %}
+                <p><strong>Category: &nbsp; &nbsp;</strong>Appliances</p>
+                {% endif %}
+                <p><strong>Product Description: &nbsp; &nbsp;</strong>{{x.pid.pdetails}}</p>
+                <p>
+                    <strong>QTY:</strong>
+                    <a href="/updateqty/0/{{x.id}}"><button class="btn btn-danger">-</button></a>
+                    <input type="number" value="{{x.qty}}">
+                    <a href="/updateqty/1/{{x.id}}"><button class="btn btn-success">+</button></a>
+                    
+                </p>
+                <a href="/remove/{{x.id}}"><button class="btn btn-primary">Remove</button></a>&nbsp;
+            </div>
+
+        </div> <!--div only for product-->
+        {% endfor %}
+    </div>
+    <!-- customer and product details-->
+    <div class="col-md-3">
+        <h5 class="bg-primary text-white p-2">Total Amount</h5>
+        <p><strong>Total({{n}} items):</strong>Rs.{{total}}</p><hr>
+        <p><strong>Total Amount:</strong>Rs.{{total}}</p>
+        <a href="/placeorder" class="btn btn-primary">Place Order</a>
+    </div>
+    <!-- Total amount section-->
+ </div>
+
+<!--main end-->
+
+{% endblock 'main' %}

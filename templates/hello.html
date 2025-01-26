@@ -1,0 +1,39 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Templates</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+</head>
+<body>
+    <h1>Templates as a Response </h1>
+    <p>{{greet}}</p>
+    {% comment %}
+    {% if x > y %}
+       <p>In the if block </p>
+       <p>{{x}} is greater </p>
+    {% else %}
+       <p>In the else block </p>
+       <p>{{y}} is greater </p>  
+    {% endif %}
+   
+
+    {% for x in l %}
+       <p>{{x}} </p>
+    {% endfor %} 
+    {% endcomment %}  
+
+    {% for x in products %}
+        <strong>ID: </strong>&nbsp;{{forloop.counter}}<br>
+        <strong> Name: </strong>&nbsp;{{x.name}}<br>
+        <strong> category: </strong>&nbsp;{{x.cat}}<br>
+        <strong> Price: </strong>&nbsp;{{x.price}}<br>
+        <hr>
+    {% endfor %}  
+    <button onclick="greet()">click me</button>
+    <br>
+    <img src="{% static 'images/flower.jpg'%}" title="myimage" alt="flower" width="300px" height="200px"/>
+    <script src="{% static 'js/main.js' %}"></script>  
+</body>
+</html>
